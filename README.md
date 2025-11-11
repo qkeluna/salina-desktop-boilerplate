@@ -61,6 +61,11 @@ salina-desktop/
 - **Node.js** >= 18.0.0
 - **pnpm** >= 8.0.0 (required for workspace management)
 
+**Windows Users:** This project uses native Node.js modules (`better-sqlite3`) that require C++ build tools. See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for detailed setup instructions including:
+- Visual Studio Build Tools installation
+- Python configuration
+- Common troubleshooting steps
+
 ### Installation
 
 1. **Clone the repository**
@@ -418,9 +423,76 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
+## 🔧 Troubleshooting
+
+### Windows: `better-sqlite3` Build Error
+
+**Error:**
+```
+Error: node-gyp failed to rebuild 'better-sqlite3'
+```
+
+**Solution:**
+1. Install Windows Build Tools (Visual Studio 2022 Build Tools with C++)
+2. Install Python 3.9+
+3. See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for complete setup guide
+
+**Quick Fix:**
+```bash
+# Rebuild native modules
+pnpm --filter @salina/desktop rebuild
+
+# Or clean and reinstall
+pnpm clean
+pnpm install
+```
+
+### macOS/Linux: Permission Errors
+
+**Error:**
+```
+EACCES: permission denied
+```
+
+**Solution:**
+```bash
+# Fix npm/pnpm permissions
+sudo chown -R $(whoami) ~/.pnpm-store
+sudo chown -R $(whoami) ~/.npm
+```
+
+### TypeScript Errors After Pull
+
+**Solution:**
+```bash
+# Rebuild all packages
+pnpm clean:build
+pnpm build
+```
+
+### Port Already in Use
+
+**Error:**
+```
+Port 5173 is already in use
+```
+
+**Solution:**
+```bash
+# Kill process on port (macOS/Linux)
+lsof -ti:5173 | xargs kill -9
+
+# Kill process on port (Windows)
+netstat -ano | findstr :5173
+taskkill /PID <PID> /F
+```
+
+For more troubleshooting, see [WINDOWS_SETUP.md](WINDOWS_SETUP.md) (Windows-specific) or open an issue.
+
 ## 📖 Documentation
 
 - **Architecture** - See `docs/architecture_interactive_enhanced.html`
+- **Windows Setup** - See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for Windows-specific setup
 - **CLAUDE.md** - Development guide for AI assistance
 - **Migration Guide** - See migration documentation for micro-frontend to monorepo transition
 

@@ -20,7 +20,9 @@
     "routes:generate": "tsr generate",
     "routes:watch": "tsr watch",
     "clean": "rm -rf .vite out dist",
-    "clean:build": "rm -rf .vite out"
+    "clean:build": "rm -rf .vite out",
+    "postinstall": "electron-rebuild -f -w better-sqlite3",
+    "rebuild": "electron-rebuild"
   },
   "dependencies": {
     "@salina/shared": "workspace:*",
@@ -48,6 +50,7 @@
     "@electron-forge/plugin-fuses": "^7.10.2",
     "@electron-forge/plugin-vite": "^7.10.2",
     "@electron/fuses": "^1.8.0",
+    "@electron/rebuild": "^3.7.2",
     "@playwright/test": "^1.56.1",
     "@tanstack/router-cli": "^1.134.12",
     "@tanstack/router-vite-plugin": "^1.134.12",
@@ -60,6 +63,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "babel-plugin-react-compiler": "^1.0.0",
     "electron": "^39.0.0",
+    "electron-rebuild": "^3.2.9",
     "playwright": "^1.56.1",
     "vite": "npm:rolldown-vite@latest"
   }

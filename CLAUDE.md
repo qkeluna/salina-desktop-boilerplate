@@ -73,6 +73,122 @@ pnpm clean                  # Clean all build artifacts and node_modules
 pnpm clean:build            # Clean only build artifacts (.vite, out, dist)
 ```
 
+### Rebuilding Native Modules
+```bash
+pnpm --filter @salina/desktop rebuild    # Rebuild Electron native modules (better-sqlite3)
+```
+
+## Troubleshooting
+
+### Windows Setup Issues
+
+**Problem:** `better-sqlite3` build errors on Windows
+
+**Root Cause:** Native Node.js modules require C++ build tools
+
+**Solution:**
+1. **Install Visual Studio Build Tools 2022** with "Desktop development with C++"
+2. **Install Python 3.9+** and add to PATH
+3. See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for complete step-by-step guide
+
+**Quick Fixes:**
+```bash
+# Option 1: Rebuild native modules
+pnpm --filter @salina/desktop rebuild
+
+# Option 2: Clean and reinstall
+pnpm clean
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+
+# Option 3: Manual electron-rebuild (if postinstall fails)
+cd packages/desktop
+npx electron-rebuild -f -w better-sqlite3
+```
+
+**Common Windows Build Errors:**
+
+1. **`node-gyp` not found:**
+   ```cmd
+   npm install -g node-gyp
+   ```
+
+2. **Python not found:**
+   ```cmd
+   # Configure npm to use Python
+   npm config set python python
+   ```
+
+3. **MSBuild not found:**
+   ```cmd
+   # Configure npm to use Visual Studio 2022
+   npm config set msvs_version 2022
+   ```
+
+### macOS/Linux Issues
+
+**Permission Errors:**
+```bash
+sudo chown -R $(whoami) ~/.pnpm-store
+sudo chown -R $(whoami) ~/.npm
+```
+
+**Xcode Command Line Tools (macOS):**
+```bash
+xcode-select --install
+```
+
+### TypeScript Errors
+
+**After pulling changes:**
+```bash
+pnpm clean:build
+pnpm build
+pnpm type-check
+```
+
+**Stale route types:**
+```bash
+pnpm --filter @salina/desktop routes:generate
+```
+
+### Port Conflicts
+
+**Port 5173 (Vite) already in use:**
+```bash
+# macOS/Linux
+lsof -ti:5173 | xargs kill -9
+
+# Windows
+netstat -ano | findstr :5173
+taskkill /PID <PID> /F
+```
+
+**Port 6006 (Storybook) already in use:**
+```bash
+# macOS/Linux
+lsof -ti:6006 | xargs kill -9
+
+# Windows
+netstat -ano | findstr :6006
+taskkill /PID <PID> /F
+```
+
+### Dependency Issues
+
+**Pnpm workspace resolution errors:**
+```bash
+# Clear pnpm cache
+pnpm store prune
+
+# Reinstall
+pnpm install --force
+```
+
+**Peer dependency warnings:**
+- These are expected with pnpm workspaces
+- The `.npmrc` file has `strict-peer-dependencies=false` to allow this
+
 ## Architecture
 
 ### Monorepo Structure (pnpm Workspaces)
