@@ -1,0 +1,43 @@
+{
+  "name": "@salina/domains-home",
+  "version": "1.0.0",
+  "description": "Home/Dashboard domain for Salina Desktop",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./models": "./dist/models/index.js",
+    "./viewmodels": "./dist/viewmodels/index.js",
+    "./views": "./dist/views/index.js",
+    "./services": "./dist/services/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@salina/shared": "workspace:*",
+    "@salina/ui": "workspace:*",
+    "@salina/infrastructure": "workspace:*",
+    "react": "^19.2.0",
+    "zod": "^4.1.12",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.2.2",
+    "@vitest/ui": "^4.0.6",
+    "jsdom": "^27.1.0",
+    "vitest": "^4.0.6"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
+  }
+}

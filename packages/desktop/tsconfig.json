@@ -1,0 +1,31 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@salina/shared": ["../shared"],
+      "@salina/ui": ["../ui"],
+      "@salina/infrastructure": ["../infrastructure"],
+      "@salina/domains-*": ["../domains/*"]
+    },
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", ".vite", "out"],
+  "references": [
+    { "path": "../shared" },
+    { "path": "../ui" },
+    { "path": "../infrastructure" },
+    { "path": "../domains/notes" },
+    { "path": "../domains/files" },
+    { "path": "../domains/transcriptions" },
+    { "path": "../domains/search" },
+    { "path": "../domains/home" }
+  ]
+}

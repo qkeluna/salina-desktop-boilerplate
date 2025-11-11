@@ -1,0 +1,36 @@
+{
+  "name": "@salina/shared",
+  "version": "1.0.0",
+  "description": "Shared utilities, types, and hooks for Salina Desktop",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./types": "./dist/types/index.js",
+    "./utils": "./dist/utils/index.js",
+    "./constants": "./dist/constants/index.js",
+    "./hooks": "./dist/hooks/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "react": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@vitest/ui": "^4.0.6",
+    "vitest": "^4.0.6"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
+  }
+}

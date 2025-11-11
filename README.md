@@ -1,476 +1,447 @@
-# Electron + shadcn/ui Template
+# Salina Desktop
 
-A modern Electron application template built with React, TypeScript, Vite, and shadcn/ui components. This template provides a solid foundation for building beautiful desktop applications with a complete UI component system and theme support.
+<p align="center">
+  <strong>Local-First Unified UI Platform</strong><br/>
+  Built with Electron, React, TypeScript, and Domain-Driven Design
+</p>
 
-## 📸 Screenshot
+<p align="center">
+  <img src="https://img.shields.io/badge/electron-39.0.0-blue" alt="Electron">
+  <img src="https://img.shields.io/badge/react-19.2.0-blue" alt="React">
+  <img src="https://img.shields.io/badge/typescript-5.9.3-blue" alt="TypeScript">
+  <img src="https://img.shields.io/badge/pnpm-workspace-orange" alt="pnpm workspace">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+</p>
 
-![Electron + shadcn/ui Template](media/screenshot.png)
+## 📖 Overview
 
-*Modern Electron application with shadcn/ui components, featuring theme toggle and responsive design*
+Salina Desktop is a modern local-first desktop application that brings together powerful features for notes, file management, transcriptions, search, and more—all while prioritizing offline capabilities, data privacy, and performance.
 
-## ✨ Features
+### Key Features
 
-### Core Framework
-- **⚡ Electron 39.0** - Cross-platform desktop app framework
-- **⚛️ React 19.2** - Modern React with latest features and concurrent rendering
-- **🔷 TypeScript 5.9** - Type-safe development with advanced type inference
-- **🚀 Rolldown Vite 7.1.20** - Next-generation Rust-based bundler replacing traditional Vite for enhanced performance
+- **🌐 Local-First Architecture** - All data stored locally with optional cloud sync
+- **📝 Notes Management** - Rich text editor with full offline support
+- **📁 File Management** - Organize and manage your files with metadata and thumbnails
+- **🎙️ Transcriptions** - Video/audio transcription using FFmpeg and Whisper AI
+- **🔍 Smart Search** - AI-powered local search with semantic understanding
+- **🏠 Unified Dashboard** - Centralized view of all your activities
+- **🔒 Privacy-First** - Your data stays on your device
+- **⚡ High Performance** - Native desktop performance with Electron
 
-### UI & Styling
-- **🎨 shadcn/ui** - Complete component library with 50+ components built on Radix UI primitives
-- **🎭 Tailwind CSS 4.1.16** - Latest utility-first CSS framework with enhanced performance
-- **🌙 Advanced Theme System** - Light, dark, and system theme modes with intelligent toggle and persistence
-- **📱 Responsive Design** - Mobile-first approach with Tailwind breakpoints
-- **🎯 Lucide React 0.552** - Beautiful, customizable SVG icons (1000+ icons)
-- **🎨 CSS Variables** - Dynamic theming with CSS custom properties
+### Architecture
 
-### Complete UI Component Set
-- **Layout Components**: Button, Card, Dialog, Sheet, Tabs, Accordion, Sidebar
-- **Form Controls**: Input, Label, Select, Checkbox, Radio Group, Switch, Slider, Textarea
-- **Navigation**: Navigation Menu, Breadcrumb, Pagination, Command Palette
-- **Feedback**: Alert, Toast, Progress, Skeleton, Sonner notifications
-- **Data Display**: Table, Avatar, Badge, Separator, Calendar, Charts (Recharts)
-- **Overlay Components**: Popover, Tooltip, Hover Card, Context Menu, Drawer
-- **Advanced Components**: Carousel, Resizable Panels, Input OTP, Date Picker
+Salina Desktop uses a **monorepo architecture** with **Domain-Driven Design (DDD)** and **MVVM pattern** for scalable, maintainable code organization:
 
-### State Management & Forms
-- **🔄 TanStack Query 5.90** - Powerful data fetching, caching, and synchronization
-- **📝 React Hook Form 7.66** - Performant forms with minimal re-renders
-- **✅ Zod 4.1** - TypeScript-first schema validation with runtime type checking
-- **🎛️ Class Variance Authority** - Type-safe component variants and styling
-- **🔗 Hookform Resolvers** - Seamless integration between forms and validation
-
-### Routing & Navigation
-- **🧭 TanStack Router 1.134** - Type-safe routing with automatic code generation
-- **📍 File-based Routes** - Intuitive file-system based routing with nested layouts
-- **🔗 100% Type-safe Navigation** - Full TypeScript inference for routes, params, and search
-- **❌ Error Handling** - Comprehensive error boundaries with user-friendly error pages
-- **🎯 Route Devtools** - Built-in developer tools for debugging routes and navigation
-- **⚡ Code Splitting** - Automatic route-based code splitting and lazy loading
-
-### Theme & Accessibility
-- **🌙 Multi-Theme Support** - Light, dark, and system preference detection
-- **🔄 Theme Toggle** - Intuitive cycling through theme modes with visual indicators
-- **♿ Accessibility First** - WCAG compliant components with proper ARIA attributes
-- **🎨 Design Tokens** - Consistent spacing, colors, and typography system
-- **📱 Responsive Breakpoints** - Mobile, tablet, and desktop optimized layouts
-
-### Development Tools
-- **🔧 Electron Forge 7.10** - Complete build and packaging toolchain
-- **⚡ React Compiler** - Automatic React optimizations with babel-plugin-react-compiler
-- **📦 Modern Tooling** - ESLint 9.39 with flat config, Rolldown Vite bundler
-- **🎯 Developer Experience** - Hot reload, TypeScript path mapping, and comprehensive linting
-- **🚀 GitHub Actions** - Automated CI/CD with cross-platform builds
-- **📋 Type Safety** - End-to-end TypeScript with strict configuration
-- **🔍 Path Aliases** - Clean imports with @ prefix for better code organization
-
-### Testing & Quality Assurance
-- **🧪 Vitest 4.0** - Fast unit testing with native ES modules support
-- **🎭 Playwright 1.56** - End-to-end testing across multiple browsers
-- **💅 Prettier 3.6** - Consistent code formatting with automatic styling
-- **🔍 Testing Library** - React component testing utilities with user-centric queries
-- **📊 Coverage Reports** - Comprehensive test coverage analysis and reporting
-- **🎯 Multi-Browser E2E** - Chromium, Firefox, and WebKit testing support
+```
+salina-desktop/
+├── packages/
+│   ├── desktop/              # Electron desktop application
+│   ├── shared/               # Shared utilities, types, hooks
+│   ├── ui/                   # Shared UI component library (shadcn/ui)
+│   ├── domains/              # Business domains (DDD)
+│   │   ├── notes/           # Notes domain (MVVM)
+│   │   ├── files/           # Files domain (MVVM)
+│   │   ├── transcriptions/  # Transcriptions domain (MVVM)
+│   │   ├── search/          # Search & Chat domain (MVVM)
+│   │   └── home/            # Dashboard domain (MVVM)
+│   └── infrastructure/       # Cross-cutting concerns
+│       ├── database/        # SQLite + migrations
+│       ├── sync/            # CRDT sync engine
+│       ├── media/           # FFmpeg services
+│       ├── ai/              # AI services (Whisper, Transformers.js)
+│       ├── auth/            # Authentication
+│       └── network/         # API client, WebSocket
+└── docs/                    # Documentation
+```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- npm or yarn
+- **Node.js** >= 18.0.0
+- **pnpm** >= 8.0.0 (required for workspace management)
 
 ### Installation
 
-1. **Clone this template**
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/rohitsoni007/electron-shadcn.git my-electron-app
-   cd my-electron-app
+   git clone <repository-url> salina-desktop
+   cd salina-desktop
    ```
 
 2. **Install dependencies**
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. **Start development**
    ```bash
-   npm start
+   pnpm dev
    ```
 
-## 📦 Available Scripts
+The Electron app will launch with hot reload enabled.
+
+## 📦 Available Commands
 
 ### Development
-- `npm start` - Start the Electron app in development mode
-- `npm run lint` - Run ESLint with modern flat config
-- `npm run type-check` - Run TypeScript type checking
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check code formatting
-- `npm run routes:generate` - Generate TanStack Router route tree
-- `npm run routes:watch` - Watch and auto-generate routes during development
+
+```bash
+pnpm dev                    # Start desktop app in development mode
+pnpm start                  # Alias for dev
+pnpm build                  # Build all packages
+pnpm lint                   # Lint all packages
+pnpm type-check             # TypeScript type checking across all packages
+pnpm format                 # Format code with Prettier
+pnpm format:check           # Check code formatting
+```
 
 ### Testing
-- `npm run test` - Run unit tests with Vitest
-- `npm run test:watch` - Run unit tests in watch mode
-- `npm run test:ui` - Run unit tests with UI interface
-- `npm run test:coverage` - Run tests with coverage report
-- `npm run test:e2e` - Run end-to-end tests with Playwright
-- `npm run test:e2e:ui` - Run E2E tests with interactive UI
-- `npm run test:e2e:headed` - Run E2E tests with visible browser
 
-### Build & Distribution
-- `npm run build` - Build the application
-- `npm run package` - Package the app for distribution
-- `npm run make` - Create distributable packages
-- `npm run publish` - Publish the app
-
-## 🏗️ Project Structure
-
-```
-src/
-├── components/          # React components
-│   ├── ui/             # shadcn/ui components
-│   ├── Layout.tsx      # Main layout component
-│   ├── ThemeProvider.tsx # Theme context provider
-│   └── ThemeToggle.tsx # Theme toggle button
-├── hooks/              # Custom React hooks
-├── lib/                # Utility functions
-├── pages/              # Page components
-│   ├── Home.tsx
-│   ├── About.tsx
-│   └── Settings.tsx
-├── routes/             # TanStack Router file-based routes
-│   ├── __root.tsx      # Root route layout
-│   ├── index.tsx       # Home route (/)
-│   ├── about.tsx       # About route (/about)
-│   └── settings.tsx    # Settings route (/settings)
-├── test/               # Unit test setup and utilities
-├── App.tsx             # Main App component
-├── main.ts             # Electron main process
-├── routeTree.gen.ts    # Auto-generated route tree (do not edit)
-└── index.css           # Global styles
-
-tests/
-└── e2e/                # End-to-end tests
-    └── example.spec.ts # Playwright E2E tests
-
-Configuration Files:
-├── eslint.config.mts   # ESLint 9 flat configuration
-├── playwright.config.ts # Playwright E2E test configuration
-├── vitest.config.ts    # Vitest unit test configuration
-├── tsr.config.json     # TanStack Router configuration
-└── .prettierrc         # Prettier formatting rules
-```
-
-## 🎨 UI Components
-
-This template includes a complete set of shadcn/ui components and modern libraries:
-
-### Complete shadcn/ui Component Library (50+ Components)
-- **Layout & Structure**: Button, Card, Dialog, Sheet, Tabs, Accordion, Sidebar, Resizable Panels
-- **Form Controls**: Input, Textarea, Label, Select, Checkbox, Radio Group, Switch, Slider, Input OTP
-- **Navigation**: Navigation Menu, Breadcrumb, Pagination, Command Palette, Menubar
-- **Feedback & Status**: Alert, Alert Dialog, Toast, Progress, Skeleton, Sonner notifications
-- **Data Display**: Table, Avatar, Badge, Separator, Calendar, Charts (Recharts integration)
-- **Overlay & Interaction**: Popover, Tooltip, Hover Card, Context Menu, Drawer (Vaul)
-- **Advanced Components**: Carousel (Embla), Collapsible, Toggle, Toggle Group, Aspect Ratio
-- **Form Integration**: Form wrapper components with React Hook Form integration
-
-### Integrated Libraries & Tools
-- **React Hook Form 7.66** - Form state management with minimal re-renders and validation
-- **Zod 4.1** - Runtime type validation and schema parsing with TypeScript inference
-- **TanStack Query 5.90** - Server state management, caching, and background updates
-- **Lucide React 0.552** - Consistent icon system with 1000+ customizable SVG icons
-- **Tailwind Merge** - Intelligent class merging for dynamic styles and conditional classes
-- **Class Variance Authority** - Type-safe component variant system with IntelliSense
-- **Next Themes** - Advanced theme management with system preference detection
-- **Sonner** - Beautiful toast notifications with stacking and positioning
-- **Recharts** - Composable charting library for data visualization
-- **Embla Carousel** - Lightweight, extensible carousel with touch support
-- **Vaul** - Drawer component for mobile-first interactions
-
-## ⚡ React Compiler
-
-This template includes the React Compiler for automatic performance optimizations:
-
-- **Automatic Memoization** - Eliminates the need for manual `useMemo`, `useCallback`, and `React.memo`
-- **Smart Re-rendering** - Reduces unnecessary component re-renders automatically
-- **Zero Configuration** - Works out of the box with your existing React code
-- **Better Performance** - Optimizes your components without code changes
-
-The React Compiler is configured in `vite.renderer.config.mts` and will automatically optimize your React components during the build process.
-
-## 🌙 Theme System
-
-The template includes a complete theme system with:
-
-- **Light Mode** - Clean, bright interface
-- **Dark Mode** - Easy on the eyes
-- **System Mode** - Follows OS preference
-- **Theme Toggle** - Easy switching between modes
-- **Persistent Settings** - Theme preference saved to localStorage
-
-### Using Themes
-
-```tsx
-import { useTheme } from "@/components/ThemeProvider";
-
-function MyComponent() {
-  const { theme, setTheme } = useTheme();
-  
-  return (
-    <button onClick={() => setTheme("dark")}>
-      Switch to Dark Mode
-    </button>
-  );
-}
-```
-
-## 🧭 Routing
-
-The template uses TanStack Router for type-safe, file-based routing:
-
-### Adding New Routes
-
-1. **Create a route file** in `src/routes/`:
-```tsx
-// src/routes/my-page.tsx
-import { createFileRoute } from '@tanstack/react-router';
-import MyPage from '../pages/MyPage';
-
-export const Route = createFileRoute('/my-page')({
-  component: MyPage,
-});
-```
-
-2. **Generate the route tree**:
 ```bash
-npm run routes:generate
+pnpm test                   # Run all unit tests
+pnpm test:watch             # Run tests in watch mode
+pnpm test:ui                # Run tests with UI
+pnpm test:coverage          # Run tests with coverage
+pnpm test:e2e               # Run E2E tests (Playwright)
+pnpm test:e2e:ui            # Run E2E tests with UI
+pnpm test:e2e:headed        # Run E2E tests with visible browser
 ```
 
-### Route Features
+### Build & Package
 
-- **Type-safe navigation** with full TypeScript inference
-- **Automatic code splitting** for better performance
-- **Built-in devtools** for debugging routes
-- **Search params and route params** with validation
-- **Nested layouts** and error boundaries
-- **Route-level data loading** with loaders
+```bash
+pnpm package                # Package the desktop app
+pnpm make                   # Create distributable packages
+pnpm publish                # Publish the app
+```
 
-## 🧪 Testing
+### Maintenance
 
-This template includes a comprehensive testing setup with both unit and end-to-end testing capabilities.
+```bash
+pnpm clean                  # Clean all build artifacts and node_modules
+pnpm clean:build            # Clean only build artifacts
+```
 
-### Unit Testing with Vitest
+## 🏗️ Monorepo Structure
 
-Vitest provides fast unit testing with native ES modules support:
+### Packages
 
-```tsx
-// src/test/example.test.tsx
-import { render, screen } from '@testing-library/react';
+#### `packages/desktop`
+The main Electron application that orchestrates all domains and provides the desktop shell.
+
+**Key Technologies:**
+- Electron 39.0
+- Electron Forge (build & packaging)
+- TanStack Router (type-safe routing)
+- TanStack Query (data fetching)
+
+#### `packages/shared`
+Shared utilities, types, constants, and React hooks used across all packages.
+
+**Exports:**
+- `@salina/shared/types` - TypeScript types and interfaces
+- `@salina/shared/utils` - Utility functions
+- `@salina/shared/constants` - Application constants
+- `@salina/shared/hooks` - Shared React hooks
+
+#### `packages/ui`
+Shared UI component library based on shadcn/ui and Radix UI primitives.
+
+**Key Technologies:**
+- shadcn/ui components (50+ components)
+- Radix UI primitives
+- Tailwind CSS 4.1
+- Class Variance Authority (CVA)
+
+**Exports:**
+- All shadcn/ui components (Button, Dialog, Input, etc.)
+- Theme system (light/dark/system modes)
+- Tailwind CSS styles
+
+#### `packages/infrastructure`
+Infrastructure layer handling cross-cutting concerns.
+
+**Modules:**
+- **database/** - SQLite adapter, migrations, query builder
+- **sync/** - CRDT sync engine for multi-device sync
+- **media/** - FFmpeg service, audio/video processing
+- **ai/** - Whisper bridge (Python), Transformers.js
+- **auth/** - Authentication and security services
+- **network/** - API client, WebSocket, sync queue
+
+#### `packages/domains/*`
+Business domains following **MVVM (Model-View-ViewModel)** pattern.
+
+Each domain package structure:
+```
+packages/domains/<domain>/
+├── models/         # Domain models (data structures)
+├── viewmodels/     # ViewModels (Zustand stores for state)
+├── views/          # React components (UI)
+├── services/       # Business logic services
+└── repositories/   # Data access layer (SQLite)
+```
+
+**Available Domains:**
+- `@salina/domains-notes` - Notes management with rich text editing
+- `@salina/domains-files` - File management and organization
+- `@salina/domains-transcriptions` - Video/audio transcription
+- `@salina/domains-search` - AI-powered search and chat
+- `@salina/domains-home` - Dashboard and quick actions
+
+## 🎨 Tech Stack
+
+### Core Framework
+- **Electron 39.0** - Cross-platform desktop framework
+- **React 19.2** - UI library with concurrent features
+- **TypeScript 5.9** - Type-safe development
+- **Rolldown Vite 7.1** - Rust-based bundler for faster builds
+
+### UI & Styling
+- **shadcn/ui** - Complete component library (50+ components)
+- **Radix UI** - Accessible component primitives
+- **Tailwind CSS 4.1** - Utility-first styling
+- **Lucide React** - Beautiful SVG icons (1000+ icons)
+- **next-themes** - Advanced theme management
+
+### State & Data Management
+- **Zustand 5.0** - Lightweight state management (ViewModels)
+- **TanStack Query 5.90** - Server state and data fetching
+- **TanStack Router 1.134** - Type-safe routing
+- **React Hook Form 7.66** - Performant form handling
+- **Zod 4.1** - Schema validation
+
+### Database & Sync
+- **SQLite (better-sqlite3)** - Local database
+- **CRDT** - Conflict-free replicated data types for sync
+- **Vector Clocks** - Lamport timestamps for distributed sync
+
+### Media & AI
+- **FFmpeg 8.0** - Video/audio processing
+- **Faster Whisper** - High-performance transcription (Python)
+- **Transformers.js** - In-browser AI models
+- **MiniSearch** - Full-text search indexing
+
+### Testing & Quality
+- **Vitest 4.0** - Fast unit testing
+- **Playwright 1.56** - End-to-end testing
+- **React Testing Library** - Component testing
+- **ESLint 9** - Code linting
+- **Prettier 3.6** - Code formatting
+
+### Build & Deployment
+- **Electron Forge 7.10** - Build toolchain
+- **pnpm workspaces** - Monorepo package management
+- **GitHub Actions** - CI/CD pipelines
+
+## 📚 Development Guide
+
+### Adding a New Domain
+
+1. **Create domain package structure**
+   ```bash
+   mkdir -p packages/domains/<domain>/{models,viewmodels,views,services,repositories}
+   ```
+
+2. **Create package.json**
+   ```json
+   {
+     "name": "@salina/domains-<domain>",
+     "version": "1.0.0",
+     "dependencies": {
+       "@salina/shared": "workspace:*",
+       "@salina/ui": "workspace:*",
+       "@salina/infrastructure": "workspace:*",
+       "zustand": "^5.0.2"
+     }
+   }
+   ```
+
+3. **Follow MVVM pattern**
+   - **Models** - Plain TypeScript interfaces/types
+   - **ViewModels** - Zustand stores for state management
+   - **Views** - React components using UI library
+   - **Services** - Business logic (pure functions)
+   - **Repositories** - Data access (SQLite queries)
+
+4. **Add to desktop package**
+   ```typescript
+   // packages/desktop/src/renderer/routes/<domain>.tsx
+   import { DomainView } from '@salina/domains-<domain>/views';
+   ```
+
+### Working with the UI Library
+
+Add new shadcn/ui components:
+```bash
+cd packages/ui
+npx shadcn@latest add <component-name>
+```
+
+Use components in domains:
+```typescript
+import { Button } from '@salina/ui/components/button';
+import { Dialog } from '@salina/ui/components/dialog';
+```
+
+### Database Migrations
+
+Create a new migration:
+```bash
+cd packages/infrastructure/database/migrations
+touch 003_add_<feature>.sql
+```
+
+Migration template:
+```sql
+-- Migration: Add <feature>
+CREATE TABLE IF NOT EXISTS <table> (
+  id TEXT PRIMARY KEY,
+  -- CRDT fields
+  vector_clock TEXT,
+  site_id TEXT,
+  version INTEGER DEFAULT 1,
+  -- Audit fields
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Testing Guidelines
+
+**Unit Tests** (Vitest):
+```typescript
+// packages/domains/<domain>/services/<Service>.test.ts
 import { describe, it, expect } from 'vitest';
-import MyComponent from '../components/MyComponent';
 
-describe('MyComponent', () => {
-  it('renders correctly', () => {
-    render(<MyComponent />);
-    expect(screen.getByText('Hello World')).toBeInTheDocument();
+describe('ServiceName', () => {
+  it('should perform action', () => {
+    // Test implementation
   });
 });
 ```
 
-**Features:**
-- **Fast execution** with native ES modules
-- **React Testing Library** integration
-- **jsdom environment** for DOM testing
-- **Coverage reports** with built-in coverage
-- **Watch mode** for development
-
-### End-to-End Testing with Playwright
-
-Playwright enables comprehensive E2E testing across multiple browsers:
-
-```tsx
-// tests/e2e/app.spec.ts
+**E2E Tests** (Playwright):
+```typescript
+// packages/desktop/tests/e2e/<feature>.spec.ts
 import { test, expect } from '@playwright/test';
 
-test('app loads correctly', async ({ page }) => {
-  await page.goto('/');
-  await expect(page).toHaveTitle(/Electron/);
-  
-  // Test navigation
-  await page.click('text=About');
-  await expect(page).toHaveURL(/.*about/);
+test('feature works correctly', async ({ page }) => {
+  await page.goto('/feature');
+  await expect(page).toHaveTitle(/Salina Desktop/);
 });
 ```
 
-**Features:**
-- **Multi-browser testing** (Chromium, Firefox, WebKit)
-- **Auto-wait** for elements and network requests
-- **Screenshots and videos** on test failures
-- **Trace viewer** for debugging
-- **Parallel execution** for faster test runs
+## 🔧 Configuration
 
-### Running Tests
+### Environment Variables
 
-```bash
-# Unit tests
-npm run test              # Run once
-npm run test:watch        # Watch mode
-npm run test:ui           # Interactive UI
-npm run test:coverage     # With coverage
+Create `.env` file in the root:
+```env
+# Database
+DATABASE_PATH=./salina.db
 
-# E2E tests
-npm run test:e2e          # Headless mode
-npm run test:e2e:ui       # Interactive mode
-npm run test:e2e:headed   # Visible browser
+# Sync
+SYNC_ENABLED=true
+SYNC_ENDPOINT=https://api.example.com/sync
+
+# AI Services
+WHISPER_MODEL=base
+WHISPER_DEVICE=cpu
+
+# Feature Flags
+ENABLE_TRANSCRIPTIONS=true
+ENABLE_AI_SEARCH=true
 ```
 
-## 🎯 Adding New Components
+### TypeScript Configuration
 
-### Using shadcn/ui CLI
+The monorepo uses TypeScript project references for fast, incremental builds:
+- `tsconfig.json` - Root configuration
+- `tsconfig.base.json` - Base configuration for all packages
+- `packages/*/tsconfig.json` - Package-specific configurations
 
-```bash
-npx shadcn@latest add [component-name]
-```
-
-### Manual Component Creation
-
-1. Create component in `src/components/`
-2. Use TypeScript and follow the existing patterns
-3. Import and use in your pages
-
-
-### Vite Configuration
-
-Modify build settings in `vite.renderer.config.mjs`:
-
-```ts
-export default defineConfig({
-  // Your custom Vite config
-});
-```
-
-## 📱 Building for Production
+## 🚢 Building for Production
 
 ### Local Build
 
-#### Package the App
-
 ```bash
-npm run package
+# Build all packages
+pnpm build
+
+# Package the app
+pnpm package
+
+# Create distributables
+pnpm make
 ```
 
-#### Create Distributables
+Output will be in `packages/desktop/out/` directory.
 
+### Platform-Specific Builds
+
+**Windows:**
+- Squirrel installer (.exe)
+- ZIP portable
+
+**macOS:**
+- ZIP archive
+
+**Linux:**
+- DEB package
+- RPM package
+
+### CI/CD (GitHub Actions)
+
+The repository includes workflows for automated builds:
+
+- **Build Workflow** - Triggered on push to main, PRs, and tags
+- **Release Workflow** - Manual or tag-based releases
+
+Create a release:
 ```bash
-npm run make
+git tag v1.0.0
+git push origin v1.0.0
 ```
 
-This will create platform-specific distributables in the `out/` directory.
+## 📖 Documentation
 
-### Automated Builds (GitHub Actions)
-
-This template includes GitHub Actions workflows for automated building and releasing:
-
-#### Build Workflow
-- **Triggers**: Push to main, pull requests, and tags
-- **Platforms**: Windows, macOS, and Linux
-- **Outputs**: Executable files for all platforms
-- **Artifacts**: Automatically uploaded and stored for 30 days
-- **Note**: Regular pushes to main only build and test - no release is created
-
-#### Release Workflow
-- **Triggers**: Manual trigger from GitHub Actions interface or git tags
-- **Features**: 
-  - Cross-platform builds
-  - Manual GitHub releases
-  - Release notes generation
-  - Custom or timestamped versions
-
-#### Manual Releases
-
-The workflow supports manual release creation through GitHub Actions interface:
-
-1. **Create a manual release**:
-   - Go to **Actions** tab in your GitHub repository
-   - Select **"Build and Release"** workflow
-   - Click **"Run workflow"** button
-   - Choose options:
-     - ✅ **Create a release**: Check this box
-     - 📝 **Release tag**: Enter custom tag (e.g., `v1.0.0`) or leave empty for auto-generated
-
-2. **Alternative: Git tag releases**:
-   ```bash
-   # Create and push a version tag for automatic release
-   git tag v1.0.0
-   git push origin v1.0.0
-   # → This triggers build and release automatically
-   ```
-
-3. **GitHub Actions will**:
-   - Build for all platforms (Windows, macOS, Linux)
-   - Create distributable packages (.exe, .dmg, .deb, .rpm, .zip)
-   - Create a GitHub release with all artifacts
-   - Generate release notes from commits
-
-4. **Release naming options**:
-   - **Custom tag**: `v1.0.0` (if specified in manual trigger)
-   - **Git tag**: Uses the pushed tag name
-   - **Auto-generated**: `v1.0.0-20241103-183045` (version + timestamp)
-
-5. **Release artifacts include**:
-   - **Windows**: `.exe` installer and `.zip` portable
-   - **macOS**: `.dmg` installer and `.zip` portable  
-   - **Linux**: `.deb` and `.rpm` packages, plus `.zip` portable
-
-**Manual control** - create releases when you're ready!
-
-#### Code Signing Setup (Optional)
-
-For production releases, you can set up code signing by adding these secrets to your GitHub repository:
-
-**macOS Code Signing:**
-- `APPLE_CERTIFICATE` - Base64 encoded .p12 certificate
-- `APPLE_CERTIFICATE_PASSWORD` - Certificate password
-- `APPLE_ID` - Apple ID for notarization
-- `APPLE_APP_SPECIFIC_PASSWORD` - App-specific password
-- `APPLE_TEAM_ID` - Apple Developer Team ID
-- `KEYCHAIN_PASSWORD` - Keychain password
-
-**Windows Code Signing:**
-- `WINDOWS_CERTIFICATE` - Base64 encoded certificate
-- `WINDOWS_CERTIFICATE_PASSWORD` - Certificate password
-
-## 🛠️ Development Tips
-
-1. **Hot Reload** - The development server supports hot reload for fast iteration
-2. **TypeScript** - Use TypeScript for better development experience
-3. **Component Library** - Leverage the included shadcn/ui components
-4. **Theme Consistency** - Use CSS variables for consistent theming
-5. **Path Aliases** - Use `@/` imports for cleaner code organization
-
-## 📚 Learn More
-
-- [Electron Documentation](https://www.electronjs.org/docs)
-- [React Documentation](https://react.dev)
-- [shadcn/ui Documentation](https://ui.shadcn.com)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Vite Documentation](https://vitejs.dev)
+- **Architecture** - See `docs/architecture_interactive_enhanced.html`
+- **CLAUDE.md** - Development guide for AI assistance
+- **Migration Guide** - See migration documentation for micro-frontend to monorepo transition
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes following the MVVM pattern
+4. Write tests for your changes
+5. Run linting and type checking (`pnpm lint && pnpm type-check`)
+6. Commit your changes (`git commit -m 'Add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
+
+### Code Style
+
+- Follow TypeScript strict mode
+- Use functional components with hooks
+- Follow MVVM pattern for domains
+- Use Zustand for state management
+- Write tests for business logic
+- Document complex functions with JSDoc
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 🙏 Acknowledgments
+
+- Built on top of [electron-shadcn](https://github.com/rohitsoni007/electron-shadcn) boilerplate
+- UI components from [shadcn/ui](https://ui.shadcn.com)
+- Architecture inspired by local-first software principles
+
 ---
 
 **Happy coding! 🚀**
 
-Built with ❤️ using Electron + shadcn/ui
+Built with ❤️ by the Salina Team

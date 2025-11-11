@@ -1,0 +1,38 @@
+{
+  "name": "@salina/infrastructure",
+  "version": "1.0.0",
+  "description": "Infrastructure layer for Salina Desktop (Database, Sync, Media, AI, Auth, Network)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./database": "./dist/database/index.js",
+    "./sync": "./dist/sync/index.js",
+    "./media": "./dist/media/index.js",
+    "./ai": "./dist/ai/index.js",
+    "./python": "./dist/python/index.js",
+    "./auth": "./dist/auth/index.js",
+    "./network": "./dist/network/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@salina/shared": "workspace:*",
+    "better-sqlite3": "^11.0.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^24.10.0",
+    "@vitest/ui": "^4.0.6",
+    "vitest": "^4.0.6"
+  }
+}
