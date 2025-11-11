@@ -14,7 +14,7 @@
       "@salina/infrastructure": ["../infrastructure"],
       "@salina/domains-*": ["../domains/*"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", ".vite", "out"],

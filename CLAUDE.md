@@ -496,7 +496,7 @@ The React Compiler automatically optimizes components:
        "@salina/ui": "workspace:*",
        "@salina/infrastructure": "workspace:*",
        "zustand": "^5.0.2",
-       "zod": "^4.1.12"
+       "zod": "^3.23.8"
      }
    }
    ```
