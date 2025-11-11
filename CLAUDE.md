@@ -35,8 +35,15 @@ pnpm format:check           # Check code formatting
 ```bash
 pnpm --filter @salina/desktop dev           # Run desktop package only
 pnpm --filter @salina/ui build              # Build UI package only
+pnpm --filter @salina/ui storybook          # Start Storybook UI component explorer
 pnpm --filter @salina/domains-notes test    # Test notes domain only
 pnpm -r build                               # Build all packages (recursive)
+```
+
+### Storybook Commands
+```bash
+pnpm --filter @salina/ui storybook          # Start Storybook dev server (http://localhost:6006)
+pnpm --filter @salina/ui build-storybook    # Build static Storybook for deployment
 ```
 
 ### Testing
@@ -227,6 +234,28 @@ The desktop package uses three separate Vite configurations:
 cd packages/ui
 npx shadcn@latest add <component-name>
 ```
+
+**Storybook Integration:**
+The UI package includes Storybook 8.6.14 for component development and documentation.
+
+**Note:** Version 8.6.14 was chosen as the latest stable release with full ecosystem support. While Storybook 10.0.6 exists, critical packages like `@storybook/test` and `@storybook/blocks` are not yet available for version 10, making 8.6.14 the most production-ready choice.
+
+```bash
+# Start Storybook dev server on http://localhost:6006
+pnpm --filter @salina/ui storybook
+
+# Build static Storybook for deployment
+pnpm --filter @salina/ui build-storybook
+```
+
+**Benefits:**
+- Develop components in isolation (no Electron overhead)
+- Interactive component catalog with 50+ shadcn/ui components
+- Visual testing with different states and props
+- Living documentation for designers and developers
+- Example stories included: Button, Card, Badge
+
+**Story Files:** Located in `packages/ui/stories/` with `.stories.tsx` extension.
 
 ### `packages/infrastructure`
 

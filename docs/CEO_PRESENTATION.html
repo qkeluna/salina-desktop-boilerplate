@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salina Desktop - Executive Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --dark-lighter: #334155;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 4rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        section h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin: 2rem 0 1rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            color: white;
+        }
+
+        .stat-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            padding: 1.25rem;
+            background: var(--light);
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .tech-item strong {
+            display: block;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-item span {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .architecture pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border: 2px solid var(--border);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--dark);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .code-block .command {
+            color: #22d3ee;
+        }
+
+        .code-block .comment {
+            color: #94a3b8;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.25rem;
+        }
+
+        .badge-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Print Styles */
+        @media print {
+            nav {
+                display: none;
+            }
+            section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Salina Desktop</h1>
+        <p>Local-First Unified UI Platform - Executive Overview</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#tech-stack">Tech Stack</a></li>
+            <li><a href="#development">Development</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>📊 Executive Summary</h2>
+
+            <div class="highlight-box">
+                <strong>Mission Statement</strong>
+                <p>Salina Desktop is a modern, local-first desktop application platform that empowers users with unified access to notes, files, transcriptions, and AI-powered search—all while prioritizing privacy, offline capabilities, and high performance.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p>Monorepo Packages</p>
+                    <h3>10</h3>
+                    <p>Modular Architecture</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <p>UI Components</p>
+                    <h3>50+</h3>
+                    <p>shadcn/ui Library</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <p>TypeScript Coverage</p>
+                    <h3>100%</h3>
+                    <p>Type-Safe Development</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <p>Business Domains</p>
+                    <h3>5</h3>
+                    <p>DDD + MVVM Pattern</p>
+                </div>
+            </div>
+
+            <h3>🎯 Key Value Propositions</h3>
+            <ul style="line-height: 2; margin-left: 1.5rem;">
+                <li><strong>Privacy-First:</strong> All data stored locally, users maintain complete control</li>
+                <li><strong>Offline-Capable:</strong> Full functionality without internet connection</li>
+                <li><strong>Native Performance:</strong> Built with Electron for cross-platform desktop experience</li>
+                <li><strong>Modern Architecture:</strong> Scalable monorepo with Domain-Driven Design</li>
+                <li><strong>Developer Experience:</strong> TypeScript, React 19, Storybook, comprehensive testing</li>
+            </ul>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <h2>✨ Core Features</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h4>Notes Management</h4>
+                    <p>Rich text editor with offline support, tags, search, and organization. Powered by BlockNote with CRDT synchronization for multi-device consistency.</p>
+                    <p style="margin-top: 1rem;">
+                        <span class="badge badge-primary">MVVM</span>
+                        <span class="badge badge-success">CRDT Sync</span>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h4>File Management</h4>
+                    <p>Organize and manage files with metadata extraction, thumbnail generation, and advanced search capabilities.</p>
+                    <p style="margin-top: 1rem;">
+                        <span class="badge badge-primary">FFmpeg</span>
+                        <span class="badge badge-success">Metadata</span>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎙️</div>
+                    <h4>Transcriptions</h4>
+                    <p>Video and audio transcription using FFmpeg for media processing and Faster Whisper AI for accurate speech-to-text conversion.</p>
+                    <p style="margin-top: 1rem;">
+                        <span class="badge badge-primary">AI-Powered</span>
+                        <span class="badge badge-warning">Python Bridge</span>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h4>Smart Search</h4>
+                    <p>AI-powered local search with semantic understanding, full-text indexing using MiniSearch, and conversational AI chat interface.</p>
+                    <p style="margin-top: 1rem;">
+                        <span class="badge badge-primary">Transformers.js</span>
+                        <span class="badge badge-success">Local AI</span>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h4>Unified Dashboard</h4>
+                    <p>Centralized view of all activities, quick actions, recent items, and aggregated insights from all domains.</p>
+                    <p style="margin-top: 1rem;">
+                        <span class="badge badge-primary">React 19</span>
+                        <span class="badge badge-success">Real-time</span>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Component Library</h4>
+                    <p>50+ pre-built UI components with Storybook for development, testing, and documentation in isolation.</p>
+                    <p style="margin-top: 1rem;">
+                        <span class="badge badge-primary">shadcn/ui</span>
+                        <span class="badge badge-success">Storybook 8.6.14</span>
+                    </p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);">
+                        <em>Note: Using Storybook 8.6.14 (latest stable with full ecosystem) vs 10.0.6 (incomplete package availability)</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture">
+            <h2>🏗️ System Architecture</h2>
+
+            <h3>Monorepo Structure</h3>
+            <div class="architecture">
+                <pre>salina-desktop/
+├── 📦 packages/
+│   ├── desktop/                    # Electron App (Main + Renderer)
+│   │   ├── src/main/              # Electron main process
+│   │   ├── src/preload/           # IPC bridge
+│   │   └── src/renderer/          # React app (TanStack Router)
+│   │
+│   ├── shared/                     # Shared Utilities
+│   │   ├── types/                 # TypeScript types
+│   │   ├── utils/                 # Utility functions
+│   │   ├── constants/             # App constants
+│   │   └── hooks/                 # Shared React hooks
+│   │
+│   ├── ui/                         # Component Library
+│   │   ├── components/            # 50+ shadcn/ui components
+│   │   ├── hooks/                 # UI-specific hooks
+│   │   ├── lib/                   # Utilities (cn function)
+│   │   ├── styles/                # Tailwind CSS
+│   │   ├── stories/               # Storybook stories
+│   │   └── .storybook/            # Storybook config
+│   │
+│   ├── infrastructure/             # Cross-Cutting Concerns
+│   │   ├── database/              # SQLite + Migrations
+│   │   ├── sync/                  # CRDT Sync Engine
+│   │   ├── media/                 # FFmpeg Services
+│   │   ├── ai/                    # AI Services (Whisper, Transformers.js)
+│   │   ├── python/                # Python Bridge
+│   │   ├── auth/                  # Authentication
+│   │   └── network/               # API Client, WebSocket
+│   │
+│   └── domains/                    # Business Domains (DDD + MVVM)
+│       ├── notes/                 # Notes Management
+│       ├── files/                 # File Management
+│       ├── transcriptions/        # Transcription Service
+│       ├── search/                # AI Search & Chat
+│       └── home/                  # Dashboard
+│           ├── models/            # Data structures
+│           ├── viewmodels/        # Zustand stores
+│           ├── views/             # React components
+│           ├── services/          # Business logic
+│           └── repositories/      # Data access (SQLite)
+│
+├── 📚 docs/                        # Documentation
+├── 🧪 tests/                       # E2E Tests (Playwright)
+└── ⚙️ Configuration Files</pre>
+            </div>
+
+            <h3>Design Patterns</h3>
+            <table>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Purpose</th>
+                    <th>Implementation</th>
+                </tr>
+                <tr>
+                    <td><strong>Domain-Driven Design</strong></td>
+                    <td>Organize code by business capability</td>
+                    <td>5 independent domain packages</td>
+                </tr>
+                <tr>
+                    <td><strong>MVVM (Model-View-ViewModel)</strong></td>
+                    <td>Separation of concerns in UI</td>
+                    <td>Zustand stores as ViewModels</td>
+                </tr>
+                <tr>
+                    <td><strong>Repository Pattern</strong></td>
+                    <td>Abstract data access</td>
+                    <td>SQLite repositories per domain</td>
+                </tr>
+                <tr>
+                    <td><strong>Service Layer</strong></td>
+                    <td>Business logic isolation</td>
+                    <td>Pure functions in services/</td>
+                </tr>
+                <tr>
+                    <td><strong>Monorepo</strong></td>
+                    <td>Code sharing & consistency</td>
+                    <td>pnpm workspaces with workspace:* protocol</td>
+                </tr>
+            </table>
+
+            <h3>Data Flow</h3>
+            <div class="highlight-box">
+                <strong>MVVM Data Flow</strong>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 2;">
+                    <li><strong>View</strong> (React Component) → Triggers action</li>
+                    <li><strong>ViewModel</strong> (Zustand Store) → Updates state, calls Service</li>
+                    <li><strong>Service</strong> → Executes business logic, calls Repository</li>
+                    <li><strong>Repository</strong> → Performs data operations (SQLite)</li>
+                    <li><strong>Model</strong> → Data returned to ViewModel</li>
+                    <li><strong>View</strong> → Re-renders with new state</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech-stack">
+            <h2>⚡ Technology Stack</h2>
+
+            <h3>Core Framework</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Electron 39.0</strong>
+                    <span>Desktop framework</span>
+                </div>
+                <div class="tech-item">
+                    <strong>React 19.2</strong>
+                    <span>UI library + Compiler</span>
+                </div>
+                <div class="tech-item">
+                    <strong>TypeScript 5.9</strong>
+                    <span>Strict type checking</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Vite 7.1 (Rolldown)</strong>
+                    <span>Rust-based bundler</span>
+                </div>
+            </div>
+
+            <h3>UI & Design System</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>shadcn/ui</strong>
+                    <span>50+ components</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Radix UI</strong>
+                    <span>Accessible primitives</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Tailwind CSS 4.1</strong>
+                    <span>Utility-first styling</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Storybook 8.6.14</strong>
+                    <span>Component explorer (latest stable)</span>
+                </div>
+            </div>
+
+            <h3>State & Routing</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Zustand 5.0</strong>
+                    <span>State management</span>
+                </div>
+                <div class="tech-item">
+                    <strong>TanStack Router</strong>
+                    <span>Type-safe routing</span>
+                </div>
+                <div class="tech-item">
+                    <strong>React Hook Form</strong>
+                    <span>Form handling</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Zod 3.23</strong>
+                    <span>Schema validation</span>
+                </div>
+            </div>
+
+            <h3>Data & Storage</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>SQLite</strong>
+                    <span>Local database</span>
+                </div>
+                <div class="tech-item">
+                    <strong>CRDT</strong>
+                    <span>Conflict-free sync</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Vector Clocks</strong>
+                    <span>Distributed timestamps</span>
+                </div>
+                <div class="tech-item">
+                    <strong>better-sqlite3</strong>
+                    <span>SQLite bindings</span>
+                </div>
+            </div>
+
+            <h3>AI & Media</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>FFmpeg 8.0</strong>
+                    <span>Media processing</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Faster Whisper</strong>
+                    <span>AI transcription</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Transformers.js</strong>
+                    <span>Browser AI models</span>
+                </div>
+                <div class="tech-item">
+                    <strong>MiniSearch</strong>
+                    <span>Full-text search</span>
+                </div>
+            </div>
+
+            <h3>Testing & Quality</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Vitest 4.0</strong>
+                    <span>Unit testing</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Playwright 1.56</strong>
+                    <span>E2E testing</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Testing Library</strong>
+                    <span>Component testing</span>
+                </div>
+                <div class="tech-item">
+                    <strong>ESLint 9</strong>
+                    <span>Code linting</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Section -->
+        <section id="development">
+            <h2>👨‍💻 Development Workflow</h2>
+
+            <h3>Quick Start</h3>
+            <div class="code-block">
+<span class="comment"># Install dependencies</span>
+<span class="command">pnpm install</span>
+
+<span class="comment"># Start development (Electron app)</span>
+<span class="command">pnpm dev</span>
+
+<span class="comment"># Start Storybook (Component development)</span>
+<span class="command">pnpm --filter @salina/ui storybook</span>
+
+<span class="comment"># Run tests</span>
+<span class="command">pnpm test</span>
+
+<span class="comment"># Build for production</span>
+<span class="command">pnpm build && pnpm package</span>
+            </div>
+
+            <h3>Development Tools</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Hot Module Replacement</h4>
+                    <p>Instant feedback during development with Vite's lightning-fast HMR for both main and renderer processes.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Storybook Integration</h4>
+                    <p>Develop and test UI components in isolation at <code>localhost:6006</code> with interactive controls and documentation.</p>
+                    <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--gray);">
+                        <strong>Version 8.6.14</strong> (latest stable) chosen over 10.0.6 due to incomplete ecosystem—critical packages like @storybook/test and @storybook/blocks not yet available for v10.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h4>Type Safety</h4>
+                    <p>100% TypeScript coverage with strict mode, project references for fast incremental builds.</p>
+                </div>
+            </div>
+
+            <h3>Code Quality Checks</h3>
+            <table>
+                <tr>
+                    <th>Check</th>
+                    <th>Command</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Type Checking</td>
+                    <td><code>pnpm type-check</code></td>
+                    <td>Verify TypeScript types across all packages</td>
+                </tr>
+                <tr>
+                    <td>Linting</td>
+                    <td><code>pnpm lint</code></td>
+                    <td>Check code style and quality with ESLint</td>
+                </tr>
+                <tr>
+                    <td>Formatting</td>
+                    <td><code>pnpm format:check</code></td>
+                    <td>Verify code formatting with Prettier</td>
+                </tr>
+                <tr>
+                    <td>Unit Tests</td>
+                    <td><code>pnpm test</code></td>
+                    <td>Run all Vitest unit tests</td>
+                </tr>
+                <tr>
+                    <td>E2E Tests</td>
+                    <td><code>pnpm test:e2e</code></td>
+                    <td>Run Playwright end-to-end tests</td>
+                </tr>
+            </table>
+
+            <h3>Deployment</h3>
+            <div class="highlight-box">
+                <strong>Build Targets</strong>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 2;">
+                    <li><strong>Windows:</strong> Squirrel installer (.exe) + ZIP portable</li>
+                    <li><strong>macOS:</strong> ZIP archive (universal binary)</li>
+                    <li><strong>Linux:</strong> DEB package + RPM package</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap">
+            <h2>🗺️ Development Roadmap</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>✅ Phase 1: Foundation (Complete)</h4>
+                    <p>
+                        • Monorepo architecture with pnpm workspaces<br>
+                        • Complete UI component library (50+ components)<br>
+                        • Storybook integration for component development<br>
+                        • TypeScript strict mode with project references<br>
+                        • Development tooling (Vite, ESLint, Prettier)
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>🚧 Phase 2: Core Domains (In Progress)</h4>
+                    <p>
+                        • Implement Notes domain with rich text editor<br>
+                        • File management domain with metadata extraction<br>
+                        • SQLite database integration with migrations<br>
+                        • CRDT sync engine implementation<br>
+                        • Basic authentication and user management
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📋 Phase 3: AI Features (Planned)</h4>
+                    <p>
+                        • Transcription domain with Faster Whisper integration<br>
+                        • Python bridge for AI model execution<br>
+                        • Smart search with Transformers.js<br>
+                        • Semantic search and embeddings<br>
+                        • Conversational AI chat interface
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>🎯 Phase 4: Cloud Sync (Future)</h4>
+                    <p>
+                        • Multi-device synchronization with CRDT<br>
+                        • End-to-end encryption for cloud data<br>
+                        • Conflict resolution strategies<br>
+                        • Offline-first progressive sync<br>
+                        • Backend API and WebSocket server
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>🚀 Phase 5: Polish & Release (Future)</h4>
+                    <p>
+                        • Comprehensive testing coverage (>90%)<br>
+                        • Performance optimization and profiling<br>
+                        • Auto-update mechanism<br>
+                        • User onboarding and documentation<br>
+                        • Public release and distribution
+                    </p>
+                </div>
+            </div>
+
+            <h3>Success Metrics</h3>
+            <div class="stats-grid">
+                <div class="stat-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <p>Test Coverage Goal</p>
+                    <h3>>90%</h3>
+                    <p>Unit + E2E Tests</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <p>Performance</p>
+                    <h3><2s</h3>
+                    <p>App Startup Time</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <p>Bundle Size</p>
+                    <h3><100MB</h3>
+                    <p>Installed Size</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Value Section -->
+        <section id="business-value">
+            <h2>💼 Business Value</h2>
+
+            <h3>Competitive Advantages</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Data Privacy</h4>
+                    <p>Local-first architecture means user data never leaves their device unless they explicitly opt-in to cloud sync. Appeals to privacy-conscious users and enterprises.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Performance</h4>
+                    <p>Native desktop performance with instant startup, offline functionality, and no network latency. Superior to web apps for power users.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h4>Scalable Architecture</h4>
+                    <p>Domain-Driven Design enables independent feature development, easier maintenance, and faster time-to-market for new capabilities.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h4>AI Integration</h4>
+                    <p>Built-in AI capabilities (transcription, search, chat) differentiate from traditional desktop apps and provide modern UX.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Extensibility</h4>
+                    <p>Monorepo structure and MVVM pattern make it easy to add new domains, integrate third-party services, and customize for enterprise clients.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Developer Experience</h4>
+                    <p>Modern tech stack, comprehensive tooling, and Storybook integration ensure high developer productivity and lower maintenance costs.</p>
+                </div>
+            </div>
+
+            <h3>Market Positioning</h3>
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Salina Desktop</th>
+                    <th>Cloud-Based Competitors</th>
+                </tr>
+                <tr>
+                    <td>Data Control</td>
+                    <td>✅ 100% local storage</td>
+                    <td>❌ Cloud-dependent</td>
+                </tr>
+                <tr>
+                    <td>Offline Access</td>
+                    <td>✅ Full functionality offline</td>
+                    <td>⚠️ Limited or none</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>✅ Native speed</td>
+                    <td>⚠️ Network latency</td>
+                </tr>
+                <tr>
+                    <td>Privacy</td>
+                    <td>✅ No data collection</td>
+                    <td>❌ Analytics & tracking</td>
+                </tr>
+                <tr>
+                    <td>Customization</td>
+                    <td>✅ Fully extensible</td>
+                    <td>⚠️ Limited by vendor</td>
+                </tr>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Salina Desktop</strong> - Built with modern technologies and best practices</p>
+        <p>Electron 39 • React 19 • TypeScript 5 • Storybook 8.6.14 • Tailwind CSS 4</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">Last Updated: November 2025</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

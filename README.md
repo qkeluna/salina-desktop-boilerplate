@@ -95,6 +95,13 @@ pnpm format                 # Format code with Prettier
 pnpm format:check           # Check code formatting
 ```
 
+### Storybook (Component Development)
+
+```bash
+pnpm --filter @salina/ui storybook           # Start Storybook dev server (http://localhost:6006)
+pnpm --filter @salina/ui build-storybook     # Build static Storybook for deployment
+```
+
 ### Testing
 
 ```bash
@@ -145,18 +152,25 @@ Shared utilities, types, constants, and React hooks used across all packages.
 - `@salina/shared/hooks` - Shared React hooks
 
 #### `packages/ui`
-Shared UI component library based on shadcn/ui and Radix UI primitives.
+Shared UI component library based on shadcn/ui and Radix UI primitives with **Storybook 8.6.14** for component development.
 
 **Key Technologies:**
 - shadcn/ui components (50+ components)
 - Radix UI primitives
 - Tailwind CSS 4.1
 - Class Variance Authority (CVA)
+- **Storybook 8.6.14** - Interactive component explorer
 
 **Exports:**
 - All shadcn/ui components (Button, Dialog, Input, etc.)
 - Theme system (light/dark/system modes)
 - Tailwind CSS styles
+
+**Storybook:** Browse and test components in isolation at `http://localhost:6006` with:
+- Interactive controls for component props
+- Visual testing with different states
+- Auto-generated documentation
+- Example stories for Button, Card, Badge components
 
 #### `packages/infrastructure`
 Infrastructure layer handling cross-cutting concerns.
